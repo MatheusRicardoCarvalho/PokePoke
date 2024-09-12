@@ -14,33 +14,31 @@ export function CardPokemon(props: Props) {
     const { name, imageUrl, type } = props.pokemon;
 
     return (
-        <div className="max-w-xs rounded-lg overflow-hidden shadow-lg border border-gray-200 bg-white p-6 relative hover:shadow-xl transition-shadow duration-300">
-            {/* Badge no canto superior direito */}
-            <div className={`absolute top-0 right-0 m-2 w-4 h-4 rounded-full ${typeColor(type)}`}></div>
-            
-            {/* Imagem do Pokémon */}
-            <div className="text-center">
-                <div className="bg-gray-100 p-4 rounded-full mb-4">
-                    <img 
-                        src={imageUrl} 
-                        alt={name} 
-                        className="mx-auto w-20 h-20 object-cover"
-                    />
-                </div>
-                
-                {/* Nome e Tipo */}
-                <h2 className="text-lg font-semibold text-gray-800 mb-2">{name}</h2>
-                <p className={`text-sm font-semibold ${typeColorText(type)} mb-4`}>{type}</p>
-
-                {/* Botão "Ver Mais" */}
-                <button className={`bg-${typeColorBg(type)} text-white font-semibold py-2 px-4 rounded-full hover:bg-${typeColorHoverBg(type)} transition duration-300`}>
-                    Ver Mais...
-                </button>
+        <div className="max-w-sm bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+            <div className={`h-32 ${typeGradient(type)} flex items-center justify-center`}>
+                <img 
+                    src={imageUrl} 
+                    alt={name} 
+                    className="w-24 h-24 object-contain filter drop-shadow-lg transform hover:scale-110 transition-transform duration-200"
+                />
             </div>
-            
-            {/* Marca d'água no fundo */}
-            <div className="absolute bottom-0 left-0 m-2 text-gray-400 text-2xl font-bold opacity-10">
-                POKEPOKE
+            <div className="p-6">
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-2xl font-bold text-gray-800">{name}</h2>
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${typeColorText(type)} ${typeColorBg(type)}`}>
+                        {type}
+                    </span>
+                </div>
+                <div className="flex justify-between items-center">
+                    <button className={`${typeColorBg(type)} text-white font-bold py-2 px-4 rounded-full hover:opacity-90 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ${typeColorRing(type)}`}>
+                        Ver Detalhes
+                    </button>
+                    <div className={`w-8 h-8 ${typeColor(type)} rounded-full flex items-center justify-center`}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
     );
@@ -92,17 +90,32 @@ function typeColorBg(type: string) {
     }
 }
 
-function typeColorHoverBg(type: string) {
+function typeColorRing(type: string) {
     switch (type.toLowerCase()) {
         case 'fire':
-            return 'red-600';
+            return 'focus:ring-red-500';
         case 'water':
-            return 'blue-600';
+            return 'focus:ring-blue-500';
         case 'grass':
-            return 'green-600';
+            return 'focus:ring-green-500';
         case 'electric':
-            return 'yellow-600';
+            return 'focus:ring-yellow-500';
         default:
-            return 'gray-600';
+            return 'focus:ring-gray-500';
+    }
+}
+
+function typeGradient(type: string) {
+    switch (type.toLowerCase()) {
+        case 'fire':
+            return 'bg-gradient-to-br from-red-400 to-yellow-400';
+        case 'water':
+            return 'bg-gradient-to-br from-blue-400 to-cyan-300';
+        case 'grass':
+            return 'bg-gradient-to-br from-green-400 to-lime-300';
+        case 'electric':
+            return 'bg-gradient-to-br from-yellow-300 to-yellow-200';
+        default:
+            return 'bg-gradient-to-br from-gray-300 to-gray-200';
     }
 }
