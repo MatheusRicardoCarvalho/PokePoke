@@ -18,12 +18,14 @@ export async function getUniquePokemon(pokmonName: string): Promise<PokemonInfo>
         throw new Error("Erro ao obter pokemon: " + error);
     }
 }
+export type Generation = 1 | 2 | 3 | 4 | 5 | 6 | 7
 
-export async function getFirstGenerationPokemons(): Promise<PokemonInfo[]> {
+
+export async function getByGeneration(generation: Generation): Promise<PokemonInfo[]> {
       const pokemonPromises: Promise<PokemonInfo>[] = [];
-  
-      for (let i = 1; i <= 500; i++) {
-          pokemonPromises.push(getUniquePokemon(i));
+      const gene = {1: 151, 2: 251, 3: 386, 4: 493, 5: 649, 6: 721, 7: 809}
+      for (let i = 1; i <= gene[generation]; i++) {
+          pokemonPromises.push(getUniquePokemon(''+i));
       }
   
       try {
