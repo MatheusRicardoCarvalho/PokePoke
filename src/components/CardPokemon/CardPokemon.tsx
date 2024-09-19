@@ -8,10 +8,13 @@ export type PokemonInfo = {
 
 export interface Props {
     pokemon: PokemonInfo;
+    isFavorite: boolean;
+    onFavoriteToggle: () => void;
 }
 
 export function CardPokemon(props: Props) {
     const { name, imageUrl, type } = props.pokemon;
+    const { isFavorite, onFavoriteToggle } = props;
     const firstType = type.split(',')[0];
     return (
         <div className="max-w-sm bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
@@ -33,11 +36,14 @@ export function CardPokemon(props: Props) {
                     <button className={`${typeColorBg(firstType)} text-gray-700 font-bold py-2 px-4 rounded-full hover:opacity-60 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ${typeColorRing(firstType)}`}>
                         Ver Detalhes
                     </button>
-                    <div className={`w-8 h-8 ${typeColor(firstType)} rounded-full flex items-center justify-center`}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <button
+                        onClick={onFavoriteToggle}
+                        className={`w-8 h-8 ${typeColor(firstType)} rounded-full flex items-center justify-center`}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill={isFavorite ? "currentColor" : "none"} stroke="currentColor">
                             <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                         </svg>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
