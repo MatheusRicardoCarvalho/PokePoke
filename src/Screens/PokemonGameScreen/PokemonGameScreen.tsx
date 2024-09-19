@@ -11,6 +11,7 @@ export default function PokemonGameScreen() {
     const [streak, setStreak] = useState<number>(0);
     const [gameMode, setGameMode] = useState<'favorites' | 'all' | null>(null);
     const [isGuessed, setIsGuessed] = useState<boolean>(false);
+    const [isRevealing, setIsRevealing] = useState<boolean>(false);
 
     useEffect(() => {
         if (gameMode) {
@@ -19,23 +20,28 @@ export default function PokemonGameScreen() {
     }, [gameMode, favorites, pokemons]);
 
     const startNewRound = () => {
-        const pokemonPool = gameMode === 'favorites' ? favorites : pokemons;
-        if (pokemonPool.length < 4) {
-            setResult("Você precisa de pelo menos 4 Pokémon para jogar!");
-            return;
-        }
+        setIsRevealing(false);
+        setIsGuessed(true); // Desabilita os botões durante a transição
 
-        const randomPokemon = pokemonPool[Math.floor(Math.random() * pokemonPool.length)];
-        setCurrentPokemon(randomPokemon);
+        setTimeout(() => {
+            const pokemonPool = gameMode === 'favorites' ? favorites : pokemons;
+            if (pokemonPool.length < 4) {
+                setResult("Você precisa de pelo menos 4 Pokémon para jogar!");
+                return;
+            }
 
-        const otherOptions = pokemonPool.filter(p => p.name !== randomPokemon.name);
-        const shuffledOptions = otherOptions.sort(() => 0.5 - Math.random()).slice(0, 3);
-        shuffledOptions.push(randomPokemon);
-        setOptions(shuffledOptions.sort(() => 0.5 - Math.random()));
+            const randomPokemon = pokemonPool[Math.floor(Math.random() * pokemonPool.length)];
+            setCurrentPokemon(randomPokemon);
 
-        setSelectedOption(null);
-        setResult(null);
-        setIsGuessed(false);
+            const otherOptions = pokemonPool.filter(p => p.name !== randomPokemon.name);
+            const shuffledOptions = otherOptions.sort(() => 0.5 - Math.random()).slice(0, 3);
+            shuffledOptions.push(randomPokemon);
+            setOptions(shuffledOptions.sort(() => 0.5 - Math.random()));
+
+            setSelectedOption(null);
+            setResult(null);
+            setIsGuessed(false);
+        }, 1000); // Espera 1 segundo antes de mudar para o próximo Pokémon
     };
 
     const handleGuess = () => {
@@ -58,6 +64,7 @@ export default function PokemonGameScreen() {
             setResult(`Ops! Errou. O Pokémon correto era ${currentPokemon?.name}. -5 pontos`);
         }
         setIsGuessed(true);
+        setIsRevealing(true);
     };
 
     const currentScore = gameMode === 'favorites' ? favoritesGameScore : allPokemonGameScore;
@@ -100,7 +107,7 @@ export default function PokemonGameScreen() {
                     <img 
                         src={currentPokemon.imageUrl} 
                         alt="Quem é esse Pokémon?" 
-                        className="w-48 h-48 object-contain filter brightness-0"
+                        className={`w-48 h-48 object-contain transition-all duration-1000 ${isRevealing ? 'filter-none' : 'brightness-0'}`}
                     />
                 </div>
             )}
