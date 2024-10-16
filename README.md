@@ -39,12 +39,12 @@ Este é um projeto de faculdade com objetivo de consumir o pokeAPI e permitir vi
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/pokemon-game.git
+   git clone https://github.com/MatheusRicardoCarvalho/PokePoke.git
    ```
 
 2. Navegue até o diretório do projeto:
    ```bash
-   cd pokemon-game
+   cd Pokepoke
    ```
 
 3. Instale as dependências:
