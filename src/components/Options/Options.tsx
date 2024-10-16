@@ -16,20 +16,20 @@ export default function Options({ onGenerationChange }: OptionsProps) {
 
   return (
     <div className="p-4">
-      <label htmlFor="generation-select" className="block text-lg font-semibold mb-2">Select Generation:</label>
+      <label htmlFor="generation-select" className="block text-lg font-semibold mb-2">Selecionar Geração:</label>
       <select
         id="generation-select"
         value={selectedGeneration}
         onChange={handleGenerationChange}
         className="border border-gray-300 rounded-md p-2"
       >
-        <option value={1}>Generation 1</option>
-        <option value={2}>Generation 2</option>
-        <option value={3}>Generation 3</option>
-        <option value={4}>Generation 4</option>
-        <option value={5}>Generation 5</option>
-        <option value={6}>Generation 6</option>
-        <option value={7}>Generation 7</option>
+        <option value={1}>Geração 1</option>
+        <option value={2}>Geração 2</option>
+        <option value={3}>Geração 3</option>
+        <option value={4}>Geração 4</option>
+        <option value={5}>Geração 5</option>
+        <option value={6}>Geração 6</option>
+        <option value={7}>Geração 7</option>
       </select>
     </div>
   );
