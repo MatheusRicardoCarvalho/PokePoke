@@ -33,7 +33,7 @@ Este é um projeto de faculdade com objetivo de consumir o pokeAPI e permitir vi
 ![Quem é esse Pokémon? - Tentativa 1](./imgs/quem-e-esse-pokemon1.png)
 
 ### Exemplo de Jogo - Tentativa 2
-![Quem é esse Pokémon? - Tentativa 2](./imgs/quem-e-esse-pokemon2.png)
+![Quem é esse Pokémon? - Acertou!](./imgs/quem-e-esse-pokemon2.png)
 
 ## Como Executar o Projeto
 
